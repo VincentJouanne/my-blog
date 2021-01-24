@@ -7,7 +7,7 @@ const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE
 module.exports = {
   siteMetadata: {
     // Used for the title template on pages other than the index site
-    siteTitle: `VJ`,
+    siteTitle: `Vincent Jouanne`,
     siteTitleAlt: `Vincent Jouanne Blog`,
   },
   plugins: [
@@ -21,9 +21,13 @@ module.exports = {
             slug: `/blog`,
           },
           {
+            title: `Tags`,
+            slug: `/tags`,
+          },    
+          {
             title: `About`,
             slug: `/about`,
-          },
+          }
         ],
         externalLinks: [
           {
@@ -43,13 +47,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `minimal-blog - @lekoarts/gatsby-theme-minimal-blog`,
-        short_name: `minimal-blog`,
-        description: `Typography driven, feature-rich blogging theme with minimal aesthetics. Includes tags/categories support and extensive features for code blocks such as live preview, line numbers, and code highlighting.`,
+        name: `vincent-jouanne-blog`,
+        short_name: `vincent-jouanne-blog`,
+        description: `This is the dev blog of Vincent Jouanne.`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#6B46C1`,
         display: `standalone`,
+        icon: `static/favicon-32x32.png`,
         icons: [
           {
             src: `/android-chrome-192x192.png`,
@@ -57,8 +62,8 @@ module.exports = {
             type: `image/png`,
           },
           {
-            src: `/android-chrome-512x512.png`,
-            sizes: `512x512`,
+            src: `/android-chrome-310x310.png`,
+            sizes: `310x310`,
             type: `image/png`,
           },
         ],

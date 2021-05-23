@@ -1,0 +1,166 @@
+---
+title: Why you should switch from Litho to Jetpack Compose ?
+date: 2021-23-05
+description: In this article I will share with you my thoughts on Litho, the UI framework made by Facebook and explain why you should (probably) not use it for your next Android application and instead go for Jetpack Compose.
+tags:
+  - 🤖 Android
+  - 🤔 Thoughts
+  - 🌈 UI
+banner: ./litho_to_compose.png
+---
+
+---
+
+When it comes to UI building in Android, you don't really have much choices... **3 ways** comes to you:
+
+- [Fully xml-based UI](https://developer.android.com/training/basics/firstapp/building-ui)
+- [Litho](https://github.com/facebook/litho)
+- [Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=CjwKCAjw-qeFBhAsEiwA2G7Nl-3JtUIOwJnfsPjrnBpxe8Z0gw_HN7cAXhw6gDJlgk48FE5YfY3-QhoCyjMQAvD_BwE&gclsrc=aw.ds)
+
+1. Xml-based layouts are the ones oftenly showcased on the contents you'll firstly find but from my POV they **are far from being easy to use** when it comes to build your UI.
+
+   Don't get me wrong on this, you'll always need some xml in your applications (for the Main Activity for example) but **avoid to use it as your go-to tool** to create your beautiful app, it will rapidly becomes a mess.
+
+2. Litho is an "Declarative" UI Framework, open-source, made by Facebook which first appeard at the droidconf SF 2017. They promote this framework for its 3 main benefits: automatic view flattening, layout calculation in a background-thread, and incremental rendering... ([what the hell are all of these ?](<(https://www.youtube.com/watch?v=uzCK4Vnme7o)>)).
+
+   I found it **quite weird** to communicate on an UI Framework by firstly **speak about the under-the-hood features** but when you have a closer look at it, Litho is made for a very specific purpose...
+
+> "A product that required best-in-class scroll performance on a RecyclerView with virtually infinite view types being developed by a very large engineering team shipping new features every week."
+
+This is a very important specification you don't want to miss and you'll discover why **if your app doesn't fit this exact scenario, Litho is not suited for your project**. In other words, if your app is not Facebook, you should not use it.
+
+3. [Jetpack Compose](https://developer.android.com/jetpack/compose) is one of the library of the [Jetpack suites](https://developer.android.com/jetpack/androidx/explorer), (I do recommend you to [check this quick intro video](https://www.youtube.com/watch?v=LmkKFCfmnhQ&ab_channel=AndroidDevelopers), so you get some hype about the whole Jetpack world 🌈 !).
+   Compose, is also a Declarative UI Framework, made by Google for anyone who wants to build modern UI with state management for any kind of application no matter the complexity.
+
+The framework has been thought and built to let you deal with little components (Composables) which work and fits together in a very-declarative manner as you would find in libraries such as [React](https://fr.reactjs.org/).
+
+## Good Bye Litho, Hello Compose 👋
+
+The purpose of this article is not to deep dive in the differences of those two frameworks but to show you how, even in simple cases, Compose handles it way better than Litho does.
+
+To give you some context, lately, I worked on a large Android project in which Litho was used for the UI.
+
+The project was not a about an infinite scroll with complex components but more **a classic application with all the basic UI features/components** we can find (simple lists, text, buttons, modals, events, states...).
+
+The 2 big issues I found on this framework are:
+
+- Lack of documentation / Community
+- UI declaration through method chaining
+- Verbose code
+
+Even if Litho provides an [official documentation](https://fblitho.com/) you'll quickly find out that there are still a lot of pages under construction and when you'll stuck on a specific problem after not having found an issue or a Stack overflow thread on it, you'll dive in the [javadoc](https://fblitho.com/javadoc/), desperately trying to understand why your button comes over you modal...
+
+### Method chaining in Litho vs Component stack in Compose
+
+Litho uses [Method Chaining](https://en.wikipedia.org/wiki/Method_chaining), which I find perfectly suited for everything except UI, it is **counter-intuitive** since a UI, looked from Top to Bottom, **looks more than a stack of components rather than a chain of components**...
+So, in Litho you'll end up with this kind of file ...
+
+```java:title=MyComponentSpec.kt
+@OnCreateLayout
+static Component onCreateLayout(
+    ComponentContext c, @Prop User user) {
+  return
+        Row.create(c)
+            .alignItems(YogaAlign.CENTER)
+            .child(Image.create(c)...)
+            .child(
+                Column.create(c)
+                    .child(Text.create(c).text(user.name))
+                    .child(Text.create(c).text(user.lastSeenOnline))
+            )
+        .build();
+}
+```
+
+While you could have this in Compose:
+
+```java:title=MyComponent.kt
+@Composable
+fun UserCard(user: User) {
+    Row(horizontalAlignment = Alignment.Center) {
+        Image(/*...*/)
+        Column {
+            Text(user.name)
+            Text(user.lastSeenOnline)
+        }
+    }
+}
+```
+
+In this simple example you can see how Compose avoid boilerplates code and goes straight to the point with a stack of UI component rather than a chain, it's a lot more intuitive isn't it ?
+
+### Dealing with state in Litho vs Compose
+
+OK now it's big brain time so fasten your seat belt:
+
+In Litho, you describe a state with the **@State** annotation, in the props of your component.
+
+```java:title=CheckBoxSpec.kt
+@LayoutSpec
+public class CheckboxSpec {
+
+  @OnCreateLayout
+  static Component onCreateLayout(
+      ComponentContext c,
+      @State boolean isChecked) {
+
+    return Column.create(c)
+        .child(Image.create(c)
+            .drawableRes(isChecked
+                ? R.drawable.is_checked
+                : R.drawable.is_unchecked))
+        .clickHandler(Checkbox.onCheckboxClicked(c))
+        .build();
+  }
+
+  @OnUpdateState
+  static void updateCheckbox(StateValue<Boolean> isChecked) {
+    isChecked.set(!isChecked.get());
+  }
+
+  @OnEvent(ClickEvent.class)
+  static void onCheckboxClicked(ComponentContext c) {
+    Checkbox.updateCheckbox(c);
+  }
+}
+```
+
+Some of the widgets (Text, Image etc...) has a clickHandler() in which, to perform the action:
+
+- You'll have to write a static function annotated with **@Event** which will handle the event, here "onCheckboxClicked()".
+- This function ("onCheckboxClicked()") will call another function ("updateCheckbox()") annotated with **@OnUpdateState** which will update the state of the component.
+
+Are you still there ?
+
+In the following file, "Checkbox" represents the generated component (from the actual file: CheckboxSpec).
+Unless you are using [their plugin](https://fblitho.com/docs/devtools/android-studio-plugin), you'll have to re-build your project in order to access the functions from the class (lol).
+
+The exact same behavior in Compose would have been done this way:
+
+```java:title=CheckBoxComponent.kt
+fun CheckboxComponent() {
+    var state by rememberSaveable {
+        mutableStateOf(
+            false
+        )
+    }
+    Checkbox(
+        checked = state,
+        onCheckedChange = {
+            state != state
+        }
+    )
+}
+```
+
+I agree, the example is not fair since Litho doesn't have a "checkbox" widget but do you see how simple is this code ? It's so satisfying to see how compose goes straight to the point.
+
+Compose can give a kind of **memory to your component** thanks to the functions _remember_ and _rememberSaveable_, you can access the state directly in the provided component's function: onCheckedChange().
+
+## Take away
+
+If you should **take 3 things** from this article:
+
+1. Go for Jetpack Compose for your UI, you'll quickly understand how fast you can build complex UI in a breeze (+ [the preview feature](https://developer.android.com/jetpack/compose/tooling) 🤘).
+2. Use Litho **partially** only if you need a Big Bad Recycler View in a specific section of your application on which you may encounter performance issues.
+3. Don't drink too much coffee, but still, drink some.

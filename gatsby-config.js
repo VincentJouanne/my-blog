@@ -1,8 +1,8 @@
 require(`dotenv`).config({
   path: `.env`,
-})
+});
 
-const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE
+const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE;
 
 module.exports = {
   siteMetadata: {
@@ -23,17 +23,17 @@ module.exports = {
           {
             title: `Tags`,
             slug: `/tags`,
-          },    
+          },
           {
             title: `About`,
             slug: `/about`,
-          }
+          },
         ],
         externalLinks: [
           {
             name: `Github`,
             url: `https://github.com/VincentJouanne?tab=repositories`,
-          }
+          },
         ],
       },
     },
@@ -80,4 +80,4 @@ module.exports = {
       },
     },
   ].filter(Boolean),
-}
+};

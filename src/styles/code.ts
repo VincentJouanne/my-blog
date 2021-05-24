@@ -1,4 +1,4 @@
-import { tint } from "@theme-ui/color"
+import { tint } from "@theme-ui/color";
 
 const code = {
   "[data-name='live-editor']": {
@@ -187,12 +187,12 @@ const code = {
     position: `relative`,
   },
   ".code-title": {
-    backgroundColor: tint(`primary`, 0.7),
+    backgroundColor: tint(`background`, 0.7),
     color: `black`,
     fontSize: 0,
     px: 3,
     py: 2,
-    fontFamily: `monospace`,
+    fontFamily: `system-ui`,
     mx: [0, 0, 0, -3],
   },
   "[data-name='live-preview'], [data-name='live-editor']": {
@@ -201,6 +201,7 @@ const code = {
   },
   ".token-line": {
     pr: 3,
+    fontFamily: `system-ui`,
   },
   ".highlight-line": {
     backgroundColor: `rgb(2, 55, 81)`,
@@ -217,6 +218,6 @@ const code = {
   ".react-live-wrapper .code-copy-button": {
     right: [0, 0, 0, -3],
   },
-}
+};
 
-export default code
+export default code;

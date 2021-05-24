@@ -1,6 +1,6 @@
 ---
 title: Why you should switch from Litho to Jetpack Compose ?
-date: 2021-23-05
+date: 2021-05-23
 description: In this article I will share with you my thoughts on Litho, the UI framework made by Facebook and explain why you should (probably) not use it for your next Android application and instead go for Jetpack Compose.
 tags:
   - 🤖 Android
@@ -29,10 +29,11 @@ When it comes to UI building in Android, you don't really have much choices... *
 
 This is a very important specification you don't want to miss and you'll discover why **if your app doesn't fit this exact scenario, Litho is not suited for your project**. In other words, if your app is not Facebook, you should not use it.
 
-3. [Jetpack Compose](https://developer.android.com/jetpack/compose) is one of the library of the [Jetpack suites](https://developer.android.com/jetpack/androidx/explorer), (I do recommend you to [check this quick intro video](https://www.youtube.com/watch?v=LmkKFCfmnhQ&ab_channel=AndroidDevelopers), so you get some hype about the whole Jetpack world 🌈 !).
+3. [Jetpack Compose](https://developer.android.com/jetpack/compose) is one of the library of the [Jetpack suites](https://developer.android.com/jetpack/androidx/explorer), (I do recommend you to [check this quick intro video](https://www.youtube.com/watch?v=LmkKFCfmnhQ&ab_channel=AndroidDevelopers), so you get some hype about the whole Jetpack world).
+
    Compose, is also a Declarative UI Framework, made by Google for anyone who wants to build modern UI with state management for any kind of application no matter the complexity.
 
-The framework has been thought and built to let you deal with little components (Composables) which work and fits together in a very-declarative manner as you would find in libraries such as [React](https://fr.reactjs.org/).
+   The framework has been thought and built to let you deal with little components (Composables) which work and fits together in a very-declarative manner as you would find in libraries such as [React](https://fr.reactjs.org/).
 
 ## Good Bye Litho, Hello Compose 👋
 
@@ -42,7 +43,7 @@ To give you some context, lately, I worked on a large Android project in which L
 
 The project was not a about an infinite scroll with complex components but more **a classic application with all the basic UI features/components** we can find (simple lists, text, buttons, modals, events, states...).
 
-The 2 big issues I found on this framework are:
+The 3 big issues I found on this framework are:
 
 - Lack of documentation / Community
 - UI declaration through method chaining
@@ -159,8 +160,7 @@ Compose can give a kind of **memory to your component** thanks to the functions 
 
 ## Take away
 
-If you should **take 3 things** from this article:
+If you should **take 2 things** from this article:
 
 1. Go for Jetpack Compose for your UI, you'll quickly understand how fast you can build complex UI in a breeze (+ [the preview feature](https://developer.android.com/jetpack/compose/tooling) 🤘).
 2. Use Litho **partially** only if you need a Big Bad Recycler View in a specific section of your application on which you may encounter performance issues.
-3. Don't drink too much coffee, but still, drink some.

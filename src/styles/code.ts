@@ -13,6 +13,7 @@ const code = {
   },
   ".prism-code": {
     fontSize: [1, 1, 2],
+    borderRadius: `20px`,
     padding: `2rem 1rem 1rem 1rem`,
     webkitOverflowScrolling: `touch`,
     backgroundColor: `transparent`,
@@ -28,6 +29,7 @@ const code = {
   },
   ".gatsby-highlight[data-language=''], .gatsby-highlight[data-language='noLineNumbers']": {
     ".prism-code": {
+      borderRadius: `20px`,
       pt: `1rem`,
     },
   },
@@ -46,7 +48,7 @@ const code = {
     position: `relative`,
     webkitOverflowScrolling: `touch`,
     bg: `rgb(1, 22, 39)`,
-    borderRadius: `2px`,
+    borderRadius: `20px`,
     mx: [0, 0, 0, -3],
     ".token-line": {
       mx: -3,
@@ -201,7 +203,7 @@ const code = {
   },
   ".token-line": {
     pr: 3,
-    fontFamily: `system-ui`,
+    fontFamily: `monospace`,
   },
   ".highlight-line": {
     backgroundColor: `rgb(2, 55, 81)`,

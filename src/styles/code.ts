@@ -1,4 +1,4 @@
-import { tint } from "@theme-ui/color";
+import { tint } from "@theme-ui/color"
 
 const code = {
   "[data-name='live-editor']": {
@@ -12,8 +12,7 @@ const code = {
     backgroundColor: tint(`primary`, 0.7),
   },
   ".prism-code": {
-    fontSize: [1, 1, 2],
-    borderRadius: `20px`,
+    fontSize: [1, 1, 1],
     padding: `2rem 1rem 1rem 1rem`,
     webkitOverflowScrolling: `touch`,
     backgroundColor: `transparent`,
@@ -29,7 +28,6 @@ const code = {
   },
   ".gatsby-highlight[data-language=''], .gatsby-highlight[data-language='noLineNumbers']": {
     ".prism-code": {
-      borderRadius: `20px`,
       pt: `1rem`,
     },
   },
@@ -48,7 +46,7 @@ const code = {
     position: `relative`,
     webkitOverflowScrolling: `touch`,
     bg: `rgb(1, 22, 39)`,
-    borderRadius: `20px`,
+    borderRadius: `2px`,
     mx: [0, 0, 0, -3],
     ".token-line": {
       mx: -3,
@@ -57,6 +55,7 @@ const code = {
     "pre code": {
       float: `left`,
       minWidth: `100%`,
+      fontFamily: `Consolas, Mono, Menlo`,
     },
     'pre[class*="language-"]:before': {
       bg: `white`,
@@ -194,7 +193,7 @@ const code = {
     fontSize: 0,
     px: 3,
     py: 2,
-    fontFamily: `system-ui`,
+    fontFamily: `Consolas, Mono, Menlo`,
     mx: [0, 0, 0, -3],
   },
   "[data-name='live-preview'], [data-name='live-editor']": {
@@ -203,7 +202,6 @@ const code = {
   },
   ".token-line": {
     pr: 3,
-    fontFamily: `monospace`,
   },
   ".highlight-line": {
     backgroundColor: `rgb(2, 55, 81)`,
@@ -220,6 +218,6 @@ const code = {
   ".react-live-wrapper .code-copy-button": {
     right: [0, 0, 0, -3],
   },
-};
+}
 
-export default code;
+export default code

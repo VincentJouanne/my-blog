@@ -7,8 +7,8 @@ const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE;
 module.exports = {
   siteMetadata: {
     // Used for the title template on pages other than the index site
-    siteTitle: `Vincent Jouanne`,
-    siteTitleAlt: `Vincent Jouanne Blog`,
+    siteTitle: `Vincent J`,
+    siteTitleAlt: `Vincent J Blog`,
   },
   plugins: [
     {
